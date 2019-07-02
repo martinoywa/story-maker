@@ -1,8 +1,12 @@
-from flask import Blueprint
+from flask import Blueprint, render_template, request
 
 # main blueprint
-main = Blueprint('main')
+main = Blueprint('main', __name__)
 
-@main.route('/')
+@main.route('/', methods=['GET', 'POST'])
 def home_page():
-    return "<h1>Hello Story Maker</h1>"
+    if request.method == 'GET':
+        return render_template('index.html')
+
+    if request.method == 'POST':
+        return render_template('story.html')
