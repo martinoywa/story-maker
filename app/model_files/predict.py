@@ -3,8 +3,9 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
+
 def one_hot_encode(arr, n_labels):
-    
+
     # Initialize the the encoded array
     one_hot = np.zeros((np.multiply(*arr.shape), n_labels), dtype=np.float32)
     
@@ -17,9 +18,10 @@ def one_hot_encode(arr, n_labels):
     return one_hot
 
 def predict(net, char, h=None, top_k=None):
-        ''' Given a character, predict the next character.
+        """ 
+            Given a character, predict the next character.
             Returns the predicted character and the hidden state.
-        '''
+        """
         
         # tensor inputs
         x = np.array([[net.char2int[char]]])
@@ -50,7 +52,7 @@ def predict(net, char, h=None, top_k=None):
 
 
 def sample(net, size, prime='The', top_k=None):
-
+    """Creates the story sample."""
     net.eval() # eval mode
     
     # First off, run through the prime characters

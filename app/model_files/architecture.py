@@ -2,7 +2,7 @@ import torch
 from torch import nn
 
 class CharRNN(nn.Module):
-    
+    """ Character model architecture."""
     def __init__(self, tokens, n_hidden=512, n_layers=2,
                                drop_prob=0.5, lr=0.001):
         super().__init__()
@@ -16,7 +16,7 @@ class CharRNN(nn.Module):
         self.int2char = dict(enumerate(self.chars))
         self.char2int = {ch: ii for ii, ch in self.int2char.items()}
         
-        ## TODO: define the layers of the model
+        # layers of the model
         self.lstm = nn.LSTM(len(self.chars), n_hidden, n_layers,
                            dropout=drop_prob, batch_first=True)
         
@@ -28,7 +28,7 @@ class CharRNN(nn.Module):
         ''' Forward pass through the network. 
             These inputs are x, and the hidden/cell state `hidden`. '''
                 
-        ## TODO: Get the outputs and the new hidden state from the lstm
+        # get the outputs and the new hidden state from the lstm
         r_output, hidden = self.lstm(x, hidden)
         out = self.dropout(r_output)
         # stack up the LSTM outputs
@@ -52,6 +52,7 @@ class CharRNN(nn.Module):
 
 
 def load_model():
+    """Loads the model and checkpoits. Returns the loaded model."""
     with open('/home/martineliteai/flask/flask_story_maker/app/model_files/rnn_20_epoch.net', 'rb') as f:
         checkpoint = torch.load(f)
     
