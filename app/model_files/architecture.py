@@ -1,5 +1,6 @@
 import torch
 from torch import nn
+from pathlib import Path
 
 class CharRNN(nn.Module):
     """ Character model architecture."""
@@ -53,8 +54,9 @@ class CharRNN(nn.Module):
 
 def load_model():
     """Loads the model and checkpoits. Returns the loaded model."""
-    with open('/home/martineliteai/flask/flask_story_maker/app/model_files/rnn_20_epoch.net', 
-        'rb') as f:
+    directory = Path('app/model_files/rnn_20_epoch.net')
+
+    with open(directory, 'rb') as f:
         checkpoint = torch.load(f)
     
     model = CharRNN(checkpoint['tokens'], n_hidden=checkpoint['n_hidden'], 
