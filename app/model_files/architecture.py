@@ -53,10 +53,12 @@ class CharRNN(nn.Module):
 
 def load_model():
     """Loads the model and checkpoits. Returns the loaded model."""
-    with open('/home/martineliteai/flask/flask_story_maker/app/model_files/rnn_20_epoch.net', 'rb') as f:
+    with open('/home/martineliteai/flask/flask_story_maker/app/model_files/rnn_20_epoch.net', 
+        'rb') as f:
         checkpoint = torch.load(f)
     
-    model = CharRNN(checkpoint['tokens'], n_hidden=checkpoint['n_hidden'], n_layers=checkpoint['n_layers'])
+    model = CharRNN(checkpoint['tokens'], n_hidden=checkpoint['n_hidden'], 
+        n_layers=checkpoint['n_layers'])
     model.load_state_dict(checkpoint['state_dict'])
     model.eval()
 
